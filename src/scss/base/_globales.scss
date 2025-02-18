@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  width: 100%;
+  height: auto;
+}
+
+h1 {
+  line-height: 1.5;
+}

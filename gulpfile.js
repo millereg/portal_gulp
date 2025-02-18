@@ -15,6 +15,7 @@ const avif = require('gulp-avif');
 const uglify = require('gulp-uglify');
 
 const htmlmin = require('gulp-htmlmin');
+const replace = require('gulp-replace');
 
 function css( done ) {
     src('src/scss/app.scss')
@@ -42,6 +43,7 @@ function imagenes() {
 function html() {
     return src('index.html')
         .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(replace('dist/', '')) // Elimina "dist/" de los href
         .pipe(dest('dist'));
 }
 
