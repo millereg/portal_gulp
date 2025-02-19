@@ -17,13 +17,15 @@ const uglify = require('gulp-uglify');
 const htmlmin = require('gulp-htmlmin');
 const replace = require('gulp-replace');
 
-function css( done ) {
+function css(done) {
     src('src/scss/app.scss')
-        .pipe( sourcemaps.init() )
-        .pipe( sass() )
-        .pipe( postcss([ autoprefixer(), cssnano() ]) )
-        .pipe( sourcemaps.write('.'))
-        .pipe( dest('dist/css') )
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer(), cssnano()]))
+        .pipe(replace('../../../../assets/img/', '../img/')) // Reemplaza rutas
+        .pipe(replace(/\.(png|jpg)/g, '.webp')) // Cambia a formato WebP
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest('dist/css'));
 
     done();
 }
@@ -35,15 +37,15 @@ function javascript() {
 }
 
 function imagenes() {
-    return src('assets/img/**/*')
+    return src('assets/img/**/*', { encoding: false })
         .pipe( imagemin({ optimizationLevel: 3 }) )
-        .pipe( dest('dist/img') )
+        .pipe( dest('dist/img', { encoding: false }))
 }
 
 function html() {
     return src('index.html')
         .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(replace('dist/', '')) // Elimina "dist/" de los href
+        .pipe(replace('dist/', ''))
         .pipe(dest('dist'));
 }
 
@@ -51,18 +53,18 @@ function versionWebp() {
     const opciones = {
         quality: 50
     }
-    return src('assets/img/**/*.{png,jpg}')
+    return src('assets/img/**/*.{png,jpg}', { encoding: false })
         .pipe( webp( opciones ) )
-        .pipe( dest('dist/img') )
+        .pipe( dest('dist/img', { encoding: false }))
 }
 
 function versionAvif() {
     const opciones = {
         quality: 50
     }
-    return src('assets/img/**/*.{png,jpg}')
+    return src('assets/img/**/*.{png,jpg}', { encoding: false })
         .pipe( avif( opciones ) )
-        .pipe( dest('dist/img'))
+        .pipe( dest('dist/img', { encoding: false }))
 }
 
 function dev() {

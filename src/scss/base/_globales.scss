@@ -17,7 +17,10 @@ html {
 body {
   font-family: "Nunito", sans-serif;
   width: 100%;
-  height: auto;
+}
+
+html, body {
+  height: 100%;
 }
 
 h1 {
