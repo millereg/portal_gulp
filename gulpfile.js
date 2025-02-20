@@ -17,6 +17,8 @@ const uglify = require('gulp-uglify');
 const htmlmin = require('gulp-htmlmin');
 const replace = require('gulp-replace');
 
+const newer = require('gulp-newer');
+
 function css(done) {
     src('src/scss/app.scss')
         .pipe(sourcemaps.init())
@@ -25,7 +27,7 @@ function css(done) {
         .pipe(replace('../../../../assets/img/', '../img/'))
         .pipe(replace(/\.(png|jpg)/g, '.webp'))
         .pipe(sourcemaps.write('.'))
-        .pipe(dest('dist/css'));
+        .pipe(dest('docs/css'));
 
     done();
 }
@@ -33,21 +35,22 @@ function css(done) {
 function javascript() {
     return src('src/js/**/*.js')
         .pipe(uglify())
-        .pipe(dest('dist/js'));
+        .pipe(dest('docs/js'));
 }
 
 function imagenes() {
     return src('assets/img/**/*', { encoding: false })
+        .pipe(newer('docs/img'))
         .pipe( imagemin({ optimizationLevel: 3 }) )
-        .pipe( dest('dist/img', { encoding: false }))
+        .pipe( dest('docs/img', { encoding: false }))
 }
 
 function html() {
     return src('index.html')
         .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(replace('dist/', ''))
+        .pipe(replace('docs/', ''))
         .pipe(replace(/assets\/(.*?\.svg)/g, '$1'))
-        .pipe(dest('dist'));
+        .pipe(dest('docs'));
 }
 
 function versionWebp() {
@@ -55,8 +58,9 @@ function versionWebp() {
         quality: 50
     }
     return src('assets/img/**/*.{png,jpg}', { encoding: false })
+        .pipe(newer({ dest: 'docs/img', ext: '.webp' }))
         .pipe( webp( opciones ) )
-        .pipe( dest('dist/img', { encoding: false }))
+        .pipe( dest('docs/img', { encoding: false }))
 }
 
 function versionAvif() {
@@ -64,8 +68,9 @@ function versionAvif() {
         quality: 50
     }
     return src('assets/img/**/*.{png,jpg}', { encoding: false })
+        .pipe(newer({ dest: 'docs/img', ext: '.avif' }))
         .pipe( avif( opciones ) )
-        .pipe( dest('dist/img', { encoding: false }))
+        .pipe( dest('docs/img', { encoding: false }))
 }
 
 function dev() {

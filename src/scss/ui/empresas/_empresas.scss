@@ -1,0 +1,57 @@
+@use "base/variables" as v;
+
+.featured {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  padding: 5rem 1rem;
+  background-color: v.$greyColor;
+
+  .section-title {
+    margin-bottom: 0.5rem;
+    letter-spacing: 1.5;
+    font-size: 36px;
+  }
+
+  &-image {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+  }
+
+  &-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+    padding: 2% 12%;
+  }
+
+  &-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: v.$whiteColor;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    &:hover {
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px;
+    }
+  }
+
+  &-button {
+    border: 1px solid v.$primaryColor;
+    background-color: transparent;
+    margin-top: 0.5rem;
+    padding: 3px 10px;
+    cursor: pointer;
+    color: v.$primaryColor;
+
+    &:hover {
+      background-color: v.$primaryColor;
+      color: v.$whiteColor;
+    }
+  }
+}
