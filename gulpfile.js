@@ -22,8 +22,8 @@ function css(done) {
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(postcss([autoprefixer(), cssnano()]))
-        .pipe(replace('../../../../assets/img/', '../img/')) // Reemplaza rutas
-        .pipe(replace(/\.(png|jpg)/g, '.webp')) // Cambia a formato WebP
+        .pipe(replace('../../../../assets/img/', '../img/'))
+        .pipe(replace(/\.(png|jpg)/g, '.webp'))
         .pipe(sourcemaps.write('.'))
         .pipe(dest('dist/css'));
 
@@ -46,6 +46,7 @@ function html() {
     return src('index.html')
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(replace('dist/', ''))
+        .pipe(replace(/assets\/(.*?\.svg)/g, '$1'))
         .pipe(dest('dist'));
 }
 
