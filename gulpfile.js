@@ -50,6 +50,7 @@ function html() {
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(replace('docs/', ''))
         .pipe(replace(/assets\/(.*?\.svg)/g, '$1'))
+        .pipe(replace(/src\//g, ''))
         .pipe(dest('docs'));
 }
 
