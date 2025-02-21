@@ -1,0 +1,104 @@
+@use "base/variables" as v;
+
+@media screen and (max-width: 700px) {
+  .join-detail {
+    min-width: auto;
+    width: auto;
+
+    h1 {
+      font-size: 32px;
+    }
+
+    .section-none {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .featured-image {
+    width: auto;
+    height: 30px;
+    margin-bottom: 0.2rem;
+  }
+
+  .featured-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    padding: 5% 10%;
+  }
+
+  .featured-card {
+    padding: 1rem;
+  }
+
+  .menu-toggle,
+  .bar {
+    display: block;
+    z-index: 3;
+  }
+
+  .menu-toggle.is-active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.is-active .bar:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+  }
+
+  .menu-toggle.is-active .bar:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    background-color: v.$blackColor;
+    display: none;
+    padding: 5rem;
+
+    a {
+      color: v.$whiteColor;
+      padding: 1.5rem;
+    }
+  }
+
+  .navbar-menu.active {
+    display: flex;
+  }
+
+  .header-title {
+    font-size: 38px;
+  }
+
+  .job-label {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .job-posted {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .join-detail {
+    h1 {
+      font-size: 25px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+
+    .section-none {
+      display: none;
+    }
+  }
+}
