@@ -1,0 +1,50 @@
+@use "base/variables" as v;
+
+.footer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: v.$primaryColor;
+  color: v.$whiteColor;
+  padding: 3rem;
+
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    h3,
+    h4 {
+      line-height: 3;
+      color: v.$yellowColor;
+    }
+
+    p {
+      max-width: 400px;
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: v.$greyColor;
+      line-height: 2;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.social-media {
+  margin-top: 1rem;
+
+  a {
+    text-decoration: none;
+    color: v.$greyColor;
+    margin-right: 10px;
+  }
+}
